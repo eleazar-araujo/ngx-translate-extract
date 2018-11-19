@@ -16,19 +16,22 @@ export abstract class AbstractAstParser {
 			return;
 		}
 
-		const firstArg = callNode.arguments[0];
-		switch (firstArg.kind) {
+		return callNode.arguments.map(argument => this.getStringByArgue(argument)[0]);
+	}
+
+	private getStringByArgue(arg: ts.Expression) {
+		switch (arg.kind) {
 			case ts.SyntaxKind.StringLiteral:
 			case ts.SyntaxKind.FirstTemplateToken:
-				return [(firstArg as ts.StringLiteral).text];
+				return [(arg as ts.StringLiteral).text];
 			case ts.SyntaxKind.ArrayLiteralExpression:
-				return (firstArg as ts.ArrayLiteralExpression).elements
+				return (arg as ts.ArrayLiteralExpression).elements
 					.map((element: ts.StringLiteral) => element.text);
 			case ts.SyntaxKind.Identifier:
 				console.log('WARNING: We cannot extract variable values passed to TranslateService (yet)');
 				break;
 			default:
-				console.log(`SKIP: Unknown argument type: '${this._syntaxKindToName(firstArg.kind)}'`, firstArg);
+				console.log(`SKIP: Unknown argument type: '${this._syntaxKindToName(arg.kind)}'`, arg);
 		}
 	}
 

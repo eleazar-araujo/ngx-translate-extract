@@ -22,9 +22,9 @@ export class FunctionParser extends AbstractAstParser implements ParserInterface
 
 		const callNodes = this._findCallNodes();
 		callNodes.forEach(callNode => {
-			const keys: string[] = this._getCallArgStrings(callNode);
-			if (keys && keys.length) {
-				collection = collection.addKeys(keys);
+			const [key, comment, context]: string[] = this._getCallArgStrings(callNode);
+			if (key) {
+				collection = collection.add(key, null, { comment, context });
 			}
 		});
 
