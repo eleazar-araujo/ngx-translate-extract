@@ -7,7 +7,7 @@ Merges with existing strings if the output file already exists.
 ## Usage
 Install the package in your project:
 
-`npm install @biesbjerg/ngx-translate-extract --save-dev`
+`npm install we-ngx-translate-extract --save-dev`
 
 Add an `extract` script to your project's `package.json`:
 ```
@@ -54,7 +54,7 @@ If you want to use spaces instead, you can do the following:
 If, for some reason, you want to extract strings not passed directly to TranslateService, you can wrap them in a custom marker function.
 
 ```ts
-import { _ } from '@biesbjerg/ngx-translate-extract';
+import { _ } from 'we-ngx-translate-extract/dist/utils/utils';
 
 _('Extract me');
 ```
